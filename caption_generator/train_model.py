@@ -1,7 +1,8 @@
 import caption_generator
 from keras.callbacks import ModelCheckpoint
 
-def train_model(weight = None, batch_size=32, epochs = 10):
+
+def train_model(weight=None, batch_size=32, epochs=10):
 
     cg = caption_generator.CaptionGenerator()
     model = cg.create_model()
@@ -16,7 +17,7 @@ def train_model(weight = None, batch_size=32, epochs = 10):
     model.fit_generator(cg.data_generator(batch_size=batch_size), steps_per_epoch=cg.total_samples/batch_size, epochs=epochs, verbose=2, callbacks=callbacks_list)
     try:
         model.save('Models/WholeModel.h5', overwrite=True)
-        model.save_weights('Models/Weights.h5',overwrite=True)
+        model.save_weights('Models/Weights.h5', overwrite=True)
     except:
         print "Error in saving model."
     print "Training complete...\n"
