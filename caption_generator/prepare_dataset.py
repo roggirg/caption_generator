@@ -20,10 +20,11 @@ def load_image(path):
 def load_encoding_model():
     # model = VGG16(weights='imagenet', include_top=True, input_shape=(224, 224, 3))
     base_model = MobileNets(input_shape=(224, 224, 3), alpha=1, include_top=False)
-    x = base_model.layers[-1]
-    x = GlobalAveragePooling2D()(x)
-    x = Reshape((1024,), name='reshape_2')(x)
-    return x
+    # x = base_model.layers[-1]
+    x = GlobalAveragePooling2D()(base_model.output)
+    model = Model(input=base_model.input, output=x)
+    # x = Reshape((1024,), name='reshape_2')(x)
+    return model
 
 
 def get_encoding(model, img):

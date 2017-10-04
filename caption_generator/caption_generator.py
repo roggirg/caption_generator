@@ -1,5 +1,3 @@
-from vgg16 import VGG16
-from inception_v3 import InceptionV3
 import numpy as np
 import pandas as pd
 from keras.models import Sequential
@@ -111,7 +109,7 @@ class CaptionGenerator():
         image_model = Sequential()
         # image_model.add(base_model)
         # image_model.add(Flatten())
-        image_model.add(Dense(EMBEDDING_DIM, input_dim=4096, activation='relu'))
+        image_model.add(Dense(EMBEDDING_DIM, input_dim=1024, activation='relu'))
 
         image_model.add(RepeatVector(self.max_cap_len))
 
